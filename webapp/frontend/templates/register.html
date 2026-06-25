@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册 - 智慧火灾监测系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #e74c3c;
+            --dark-bg: #2c3e50;
+            --card-bg: #34495e;
+            --text-light: #ecf0f1;
+            --text-dark: #bdc3c7;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            display: flex; align-items: center; justify-content: center;
+            min-height: 100vh; margin: 0; color: var(--text-light);
+        }
+        .login-card {
+            background: var(--card-bg);
+            padding: 45px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-dark);
+            width: 380px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .logo-icon {
+            font-size: 5em;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(231, 76, 60, 0.4);
+        }
+        h2 { margin-bottom: 30px; font-weight: 600; font-size: 1.8em; }
+
+        .flash-msg {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid var(--primary-red);
+            color: var(--primary-red);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            animation: bounceIn 0.5s ease-out;
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .input-group { margin-bottom: 20px; text-align: left; position: relative; }
+        .input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-dark); }
+
+        input {
+            width: 100%;
+            padding: 14px 14px 14px 45px;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-sizing: border-box;
+            color: white;
+            outline: none;
+            transition: all 0.3s;
+        }
+        input:focus { border-color: var(--primary-red); box-shadow: 0 0 8px rgba(231, 76, 60, 0.4); }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        button:active { transform: scale(0.98); }
+
+        .footer-links {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border-color);
+        }
+        .footer-links a { color: var(--text-dark); text-decoration: none; font-size: 0.9em; }
+        .footer-links a:hover { color: var(--primary-red); text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="logo-icon"><i class="fas fa-user-shield"></i></div>
+        <h2>创建安全账户</h2>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="flash-msg">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" placeholder="设置用户名" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="设置登录密码" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-key"></i>
+                <input type="text" name="invitation_code" placeholder="输入专属邀请码" required>
+            </div>
+            <button type="submit">立即创建</button>
+        </form>
+
+        <div class="footer-links">
+            <a href="/login">已有账号？返回登录</a>
+        </div>
+    </div>
+</body>
+</html>

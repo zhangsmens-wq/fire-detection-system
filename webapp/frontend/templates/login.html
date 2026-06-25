@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - 智慧火灾监测系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #e74c3c;
+            --dark-bg: #2c3e50;
+            --card-bg: #34495e;
+            --text-light: #ecf0f1;
+            --text-dark: #bdc3c7;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --gradient-start: #34495e;
+            --gradient-end: #2c3e50;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text-light);
+        }
+        .login-card {
+            background: var(--card-bg);
+            padding: 45px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-dark);
+            width: 380px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        .logo-icon {
+            font-size: 5em;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(231, 76, 60, 0.4);
+        }
+        h2 {
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 1.8em;
+        }
+        .flash-msg {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid var(--primary-red);
+            color: var(--primary-red);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            animation: bounceIn 0.5s ease-out;
+        }
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+            position: relative;
+        }
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dark);
+        }
+        input {
+            width: 100%;
+            padding: 14px 14px 14px 45px;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-sizing: border-box;
+            color: white;
+            outline: none;
+            transition: all 0.3s;
+        }
+        input:focus {
+            border-color: var(--primary-red);
+            box-shadow: 0 0 8px rgba(231, 76, 60, 0.4);
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        button:active { transform: scale(0.98); }
+        .footer-links {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border-color);
+            font-size: 0.9em;
+        }
+        .footer-links a {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer-links a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="content-wrapper">
+            <div class="logo-icon"><i class="fas fa-fire"></i></div>
+            <h2>系统登录</h2>
+
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="flash-msg">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <form method="POST">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="username" placeholder="请输入用户名" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" placeholder="请输入密码" required>
+                </div>
+                <button type="submit">进入监测系统</button>
+            </form>
+
+            <div class="footer-links">
+                <span style="color: var(--text-dark);">还没有账号？</span>
+                <a href="/register">立即注册</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

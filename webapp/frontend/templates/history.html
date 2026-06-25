@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"><title>报警历史</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f7f6; padding: 20px; }
+        .box { max-width: 900px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; }
+        th { background: #d32f2f; color: white; }
+        .btn { text-decoration: none; color: #d32f2f; font-weight: bold; border: 1px solid #d32f2f; padding: 5px 15px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <a href="/" class="btn">← 返回系统</a>
+        <h2>📋 系统报警历史记录 (数据库)</h2>
+        <table>
+            <tr><th>编号</th><th>时间</th><th>置信度</th><th>来源</th><th>状态</th></tr>
+            {% for log in logs %}
+            <tr>
+                <td>{{ log.id }}</td>
+                <td>{{ log.event_time.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td>{{ (log.confidence * 100)|round(1) }}%</td>
+                <td>{{ log.source }}</td>
+                <td style="color:red; font-weight:bold;">已记录火情</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
